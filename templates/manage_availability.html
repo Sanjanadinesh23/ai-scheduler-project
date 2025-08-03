@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Manage Availability{% endblock %}
+{% block content %}
+<article>
+    <header><h2>Manage Availability for {{ employee.name }}</h2></header>
+    <form method="POST" action="">
+        <div class="grid">
+            {% for day in days %}
+            <label><input type="checkbox" name="unavailable" value="{{ day }}" {% if day in unavailable %}checked{% endif %}> {{ day }}</label>
+            {% endfor %}
+        </div>
+        <footer class="grid">
+            <button type="submit" class="primary">Save Availability</button>
+            <a href="{{ url_for('employee_management') }}" role="button" class="secondary">Cancel</a>
+        </footer>
+    </form>
+</article>
+{% endblock %}

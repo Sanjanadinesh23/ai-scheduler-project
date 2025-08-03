@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Manual Schedule Editor - AI Scheduler Pro{% endblock %}
+
+{% block content %}
+<header>
+    <h1 class="title">Manual Schedule Editor</h1>
+    <p class="subtitle">Manually override AI suggestions. Your changes will teach the AI your preferences for future schedules.</p>
+</header>
+
+<article>
+    {% if schedule %}
+        <figure>
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        {% for day in days %}<th>{{ day }}</th>{% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shift in shifts %}
+                    <tr>
+                        <th scope="row">{{ shift }}</th>
+                        {% for day in days %}
+                        <td>
+                            {% for item in schedule %}
+                                {% if item.day == day and item.shift == shift %}
+                                    <div style="padding: 0.75rem; border: 1px solid var(--pico-muted-border-color); border-radius: var(--pico-border-radius); margin-bottom: 0.5rem;">
+                                        <strong>{{ item.task_name }}</strong><br>
+                                        <form method="POST" action="{{ url_for('update_assignment', task_id=item.task_id) }}" style="margin-top: 0.5rem;">
+                                            <select name="employee_id" onchange="this.form.submit()">
+                                                {% for emp in employees %}
+                                                    <option value="{{ emp.id }}" {% if emp.id == item.employee_id %}selected{% endif %}>{{ emp.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </figure>
+    {% endif %}
+    {% if unscheduled %}
+        <aside>
+            <h3 style="color: var(--pico-color-red-500);">Unscheduled Tasks</h3>
+            <ul>
+                {% for task in unscheduled %}
+                    <li><b>{{ task.name }}</b> (Requires: {{ task.required_skill }})</li>
+                {% endfor %}
+            </ul>
+        </aside>
+    {% endif %}
+</article>
+{% endblock %}

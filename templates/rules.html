@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Rules Configuration - AI Scheduler Pro{% endblock %}
+
+{% block content %}
+<article>
+    <header>
+        <h1 class="title">Rules & Preferences</h1>
+        <p class="subtitle">Define custom organizational constraints to guide the AI scheduler.</p>
+    </header>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        
+        <div class="grid">
+            <label for="max_shifts_per_week">
+                {{ form.max_shifts_per_week.label }}
+                {{ form.max_shifts_per_week(placeholder="e.g., 5") }}
+                <small>Set the maximum number of shifts any single employee can be assigned in one week.</small>
+            </label>
+            <div></div> <!-- Empty grid cell for alignment -->
+        </div>
+
+        <footer>
+            {{ form.submit(class_="primary") }}
+        </footer>
+    </form>
+
+</article>
+
+<article>
+    <header>
+        <h2>Future Rules</h2>
+    </header>
+    <p>This section is a placeholder for more advanced rules that can be added in the future, such as:</p>
+    <ul>
+        <li>Rules for assigning tasks on weekends or holidays.</li>
+        <li>Location-specific constraints (e.g., only schedule employees from the "North" location for tasks in the "North Sector").</li>
+    </ul>
+</article>
+{% endblock %}

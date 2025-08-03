@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<article>
+    <header><h2>{{ title }}</h2></header>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <label>{{ form.name.label }}{{ form.name() }}</label>
+        <div class="grid">
+            <label>{{ form.required_skill.label }}{{ form.required_skill() }}</label>
+            <label>{{ form.priority.label }}{{ form.priority() }}</label>
+        </div>
+        <div class="grid">
+            <label>{{ form.estimated_time.label }}{{ form.estimated_time() }}</label>
+            <label>{{ form.deadline.label }}{{ form.deadline() }}</label>
+        </div>
+        <footer class="grid">
+            {{ form.submit(class_="primary") }}
+            <a href="{{ url_for('task_management') }}" role="button" class="secondary">Cancel</a>
+        </footer>
+    </form>
+</article>
+{% endblock %}

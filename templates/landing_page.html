@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>AI Workforce Scheduler Pro</title>
+    <style>
+        :root { --pico-primary: #1e88e5; }
+        body { background-color: #f4f5f7; }
+        .hero { text-align: center; padding: 4rem 1rem; background-color: white; }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #2c3e50;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .hero h2 {
+            font-weight: 400;
+            color: #5a6a7b;
+        }
+        .features { padding: 2rem 0; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <hgroup>
+                <h1>AI-Driven Workforce Planning</h1>
+                <h2>Automate scheduling, optimize resources, and adapt to changes in real-time.</h2>
+            </hgroup>
+            <p>
+                <a href="{{ url_for('dashboard') }}" role="button" class="primary" style="font-size: 1.2rem; padding: 0.75rem 1.5rem;">Launch Scheduler</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="container features">
+        <div class="grid">
+            <article>
+                <header><strong>🤖 Intelligent Scheduling</strong></header>
+                Our AI engine automatically generates optimal weekly schedules based on employee skills, availability, and task priorities.
+            </article>
+            <article>
+                <header><strong>🔄 Dynamic Re-planning</strong></header>
+                Instantly re-adjusts the entire schedule when an employee takes leave or a new high-priority task is added.
+            </article>
+            <article>
+                <header><strong>🧠 Continuous Learning</strong></header>
+                The system learns from your manual edits, making its suggestions smarter and more aligned with your preferences over time.
+            </article>
+        </div>
+    </div>
+</body>
+</html>

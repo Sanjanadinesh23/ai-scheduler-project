@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<article>
+    <header><h2>{{ title }}</h2></header>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="grid">
+            <label>{{ form.name.label }}{{ form.name() }}</label>
+            <label>{{ form.role.label }}{{ form.role() }}</label>
+        </div>
+        <div class="grid">
+            <label>{{ form.department.label }}{{ form.department() }}</label>
+            <label>{{ form.location.label }}{{ form.location() }}</label>
+        </div>
+        <label>{{ form.skills.label }}{{ form.skills() }}</label>
+        <footer class="grid">
+            {{ form.submit(class_="primary") }}
+            <a href="{{ url_for('employee_management') }}" role="button" class="secondary">Cancel</a>
+        </footer>
+    </form>
+</article>
+{% endblock %}

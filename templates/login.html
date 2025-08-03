@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>Login - AI Scheduler Pro</title>
+    <style>
+        body { background-color: #f4f5f7; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        main { max-width: 500px; width: 100%; }
+        article { box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        h1 { color: var(--pico-primary); font-weight: 700; } /* Changed to primary blue for visibility */
+        h2 { color: #495057; } /* Darkened for better contrast */
+        .flash.danger { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 1rem; border-radius: var(--pico-border-radius); margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <article>
+            <header style="text-align: center;">
+                <hgroup>
+                    <h1>AI Scheduler Pro</h1>
+                    <h2>Admin Login</h2>
+                </hgroup>
+            </header>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <label for="username">
+                    Username
+                    {{ form.username(placeholder="Enter your username") }}
+                </label>
+                <label for="password">
+                    Password
+                    {{ form.password(placeholder="Enter your password") }}
+                </label>
+                {{ form.submit(class_="primary") }}
+            </form>
+        </article>
+    </main>
+</body>
+</html>

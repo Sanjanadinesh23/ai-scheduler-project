@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AI Scheduler Pro{% endblock %}
+
+{% block content %}
+<header>
+    <h1 class="title">Dashboard</h1>
+    <p class="subtitle">An at-a-glance overview of this week's schedule and resource allocation.</p>
+</header>
+
+<!-- Top Row: Key Performance Indicators (KPIs) -->
+<div class="grid">
+    <article>
+        <header><strong>📊 Task Progress</strong></header>
+        <h2 style="margin-bottom: 0;">{{ task_count_scheduled }} / {{ task_count_scheduled + task_count_unscheduled }}</h2>
+        <p>Tasks Scheduled</p>
+    </article>
+    <article>
+        <header><strong>🚥 Resource Utilization</strong></header>
+        <ul>
+            {% for name, count in utilization.items()|sort %}
+                <li>
+                    {{ name }}: {{ count }} shifts
+                    {% if count == 0 %}
+                        <span style="color: #dc3545;">(Underutilized)</span>
+                    {% elif count > 3 %}
+                        <span style="color: #ffc107;">(High Load)</span>
+                    {% else %}
+                        <span style="color: #28a745;">(Balanced)</span>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>No employees found.</li>
+            {% endfor %}
+        </ul>
+    </article>
+    <article>
+        <header><strong>🔄 Upcoming Absences</strong></header>
+        <ul>
+            {% for emp in employees_on_leave %}
+                <li>{{ emp.name }} - Off on: {{ emp.unavailable_days|join(', ') }}</li>
+            {% else %}
+                <li>No upcoming leave recorded.</li>
+            {% endfor %}
+        </ul>
+    </article>
+</div>
+
+<article>
+    <header><h2>📅 Weekly Schedule Overview</h2></header>
+    {% if schedule %}
+        <figure>
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        {% for day in days %}
+                            <th scope="col">{{ day }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shift in shifts %}
+                    <tr>
+                        <th scope="row">{{ shift }}</th>
+                        {% for day in days %}
+                        <td>
+                            {% for item in schedule %}
+                                {% if item.day == day and item.shift == shift %}
+                                    <div style="padding: 0.5rem; border: 1px solid var(--pico-muted-border-color); border-radius: 4px; margin-bottom: 0.5rem;">
+                                        <strong>{{ item.task_name }}</strong><br>
+                                        <small>{{ item.employee_name }}</small>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </figure>
+    {% else %}
+        <p>No schedule could be generated. Add employees and tasks to get started.</p>
+    {% endif %}
+</article>
+{% endblock %}
