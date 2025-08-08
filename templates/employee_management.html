@@ -45,11 +45,12 @@
                             {% endif %}
                         </td>
                         <td>
-                            <div class="grid" style="gap: 0.5rem;">
-                                <a href="{{ url_for('edit_employee', employee_id=emp.id) }}" role="button" class="secondary" style="margin: 0;">Edit</a>
-                                <a href="{{ url_for('manage_availability', employee_id=emp.id) }}" role="button" class="contrast" style="margin: 0;">Leave</a>
+                            <!-- CORRECTED BUTTON CONTAINER -->
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <a href="{{ url_for('edit_employee', employee_id=emp.id) }}" role="button" class="secondary" style="margin: 0; flex-shrink: 0;">Edit</a>
+                                <a href="{{ url_for('manage_availability', employee_id=emp.id) }}" role="button" class="contrast" style="margin: 0; flex-shrink: 0;">Leave</a>
                                 <form method="POST" action="{{ url_for('delete_employee', employee_id=emp.id) }}" onsubmit="return confirm('Are you sure you want to delete this employee? This action cannot be undone.');" style="margin: 0;">
-                                    <button type="submit" class="secondary" style="--pico-background-color: #dc3545; --pico-border-color: #dc3545; margin: 0;">Delete</button>
+                                    <button type="submit" class="secondary" style="--pico-background-color: #dc3545; --pico-border-color: #dc3545; margin: 0; flex-shrink: 0;">Delete</button>
                                 </form>
                             </div>
                         </td>
